@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Podrška u obrazovanju - email</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+
+        :root {
+            --theme-color: #0B8E6A;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .img-responsive {
+            max-width: 100%;
+        }
+
+        .img-icon {
+            max-width: 100%;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+        .left-gap-to-view {
+            margin-left: 40px;
+        }
+
+        a.facebook {
+            background: #3b5998;
+            color: #fff;
+            font-size: 14px;
+            padding: 15px 35px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        a.twitter {
+            background: #1da1f2;
+            color: #fff;
+            font-size: 14px;
+            padding: 15px 35px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        a.facebook:hover, a.twitter:hover {
+            opacity: 0.9;
+            transition: 0.3s ease;;
+        }
+
+        a.facebook img, a.twitter img {
+            margin-right: 6px;
+            vertical-align: middle;
+            width: 16px;
+        }
+
+        /* Responsive */
+        @media only screen and (max-width: 600px) {
+            .left-gap-to-view {
+                margin-left: 0px;
+            }
+
+            /* Tables
+              parameters: width, alignment, padding */
+            table[class=w3l-scale] {
+                width: 100% !important;
+            }
+
+            table[class=w3l-scale-300] {
+                width: 100% !important;
+                height: 300px !important;
+            }
+
+            table[class=w3l-scale-90] {
+                width: 90% !important;
+            }
+
+            /* Td */
+            td[class=w3l-scale-left] {
+                width: 100% !important;
+                text-align: left !important;
+            }
+
+            td[class=w3l-scale-height] {
+                height: 70px !important;
+            }
+
+            td[class=w3l-scale-left-bottom] {
+                width: 100% !important;
+                text-align: left !important;
+                padding-bottom: 24px !important;
+            }
+
+            td[class=w3l-scale-left-top] {
+                width: 100% !important;
+                text-align: left !important;
+                padding-top: 24px !important;
+            }
+
+            td[class=w3l-scale-left-all] {
+                width: 100% !important;
+                text-align: left !important;
+                padding-top: 24px !important;
+                padding-bottom: 24px !important;
+            }
+
+            td[class=w3l-scale-center] {
+                width: 100% !important;
+                text-align: center !important;
+            }
+
+            td[class=w3l-scale-center-both] {
+                width: 100% !important;
+                text-align: center !important;
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+
+            td[class=w3l-scale-center-bottom] {
+                width: 100% !important;
+                text-align: center !important;
+                padding-bottom: 24px !important;
+            }
+
+            td[class=w3l-scale-center-top] {
+                width: 100% !important;
+                text-align: center !important;
+                padding-top: 24px !important;
+            }
+
+            td[class=w3l-scale-center-all] {
+                width: 100% !important;
+                text-align: center !important;
+                padding-top: 24px !important;
+                padding-bottom: 24px !important;
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+
+            td[class=w3l-scale-right] {
+                width: 100% !important;
+                text-align: right !important;
+            }
+
+            td[class=w3l-scale-right-bottom] {
+                width: 100% !important;
+                text-align: right !important;
+                padding-bottom: 24px !important;
+            }
+
+            td[class=w3l-scale-right-top] {
+                width: 100% !important;
+                text-align: right !important;
+                padding-top: 24px !important;
+            }
+
+            td[class=w3l-scale-right-all] {
+                width: 100% !important;
+                text-align: right !important;
+                padding-top: 24px !important;
+                padding-bottom: 24px !important;
+            }
+
+            td[class=w3l-scale-center-bottom-both] {
+                width: 100% !important;
+                text-align: center !important;
+                padding-bottom: 24px !important;
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+
+            td[class=w3l-scale-center-top-both] {
+                width: 100% !important;
+                text-align: center !important;
+                padding-top: 24px !important;
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+
+            td[class=reset] {
+                height: 0px !important;
+            }
+
+            td[class=w3l-scale-center-topextra] {
+                width: 100% !important;
+                text-align: center !important;
+                padding-top: 84px !important;
+            }
+
+            img[class="reset"] {
+                display: inline !important;
+            }
+
+            img[class="scale-inline"] {
+                display: inline !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<!-- Header -->
+<table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale" style="background-color: #1C1C1C"
+       width="100%">
+    <tr>
+        <td height="75">&nbsp;</td>
+    </tr>
+    <tr>
+        <td>
+            <table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale"
+                   style="background-color: #0B8E6A" width="620">
+                <tr>
+                    <td>
+                        <table align="left" border="0" cellpadding="0" cellspacing="0" class="w3l-scale-300"
+                               width="330">
+                            <tr>
+                                <td height="70" style="font-size: 1px">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="w3l-scale-center-both">
+                                    <table align="right" border="0" cellpadding="0" cellspacing="0"
+                                           class="w3l-scale" width="300">
+                                        <tr>
+                                            <td style="color: #FFFFFF;">
+                                                <a style="font-size: 70px; display: inline-block; color: #fff; padding: 10px; line-height: 1; font-weight: 200; border: 3px solid rgba(255,255,255,0.8);">P.U.O.</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="50">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: #FFFFFF;">
+                                                Podrška u obrazovanju
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="10"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class=" scale" style="color: #FFFFFF; font-size: 35px;">
+                                                <span>Odobren obilazak ustanove: </span>
+                                                <span th:text="${nazivUstanove}"></span><br>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <table align="right" border="0" cellpadding="0" cellspacing="0" class="w3l-scale-300"
+                               width="282">
+                            <tr>
+                                <td class="w3l-scale-right" valign="bottom"><a href="#url"><img
+                                        src='cid:slika1' style="display: block"
+                                        class="w3l-scale-inline img-responsive"></a></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<!-- 2 column -->
+<table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale" style="background-color: #1C1C1C"
+       width="100%">
+    <tr>
+        <td>
+            <table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale"
+                   style="background-color: #FFFFFF" width="620">
+                <tr>
+                    <td>
+
+                        <!-- Image -->
+                        <table align="right" border="0" cellpadding="0" cellspacing="0" class="w3l-scale"
+                               style="background-color: #fff" width="310">
+                            <tr>
+                                <td align="center" class="w3l-scale-center-both"><a href="#url"><img
+                                        src='cid:logoUstanove' class="img-responsive" style="display: block"></a>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- Text -->
+                        <table align="left" border="0" cellpadding="0" cellspacing="0"
+                               class="w3l-scale left-gap-to-view" style=" font-size: 14px; color: #9b9b9b;"
+                               width="270">
+                            <tr>
+                                <td height="50">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="w3l-scale-center-both">
+                                    <table align="left" border="0" cellpadding="0" cellspacing="0" class="w3l-scale"
+                                           style="font-size: 14px; color: #9b9b9b;" width="250">
+                                        <tr>
+                                            <td align="center"
+                                                style=" font-size: 17px; color: #1c1c1c; font-weight: bold;">
+                                                Zakazali ste obilazak ustanove.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="10" valign="bottom">
+                                                <table align="center" border="0" cellpadding="0" cellspacing="0" width="30">
+                                                    <tr>
+                                                        <td height="3"
+                                                            style="background-color: var(--theme-color); border-radius: 3px">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="30">&nbsp;</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td align="center"
+                                                style=" font-size: 17px; color: #1c1c1c; font-weight: bold;">
+                                                Datum: <span th:text="${datum}"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="15">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center"
+                                                style=" font-size: 17px; color: #1c1c1c; font-weight: bold;">
+                                                Vreme: <span th:text="${vreme}"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="30">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td height="10" valign="bottom">
+                                                <table align="center" border="0" cellpadding="0" cellspacing="0" width="30">
+                                                    <tr>
+                                                        <td height="3"
+                                                            style="background-color: var(--theme-color); border-radius: 3px">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td align="center"
+                                                style=" font-size: 18px; color: #1c1c1c; font-weight: bold;">
+                                                Radujemo se Vašem dolasku!
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="30">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="w3l-scale-height" height="40">&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<!-- 2 column -->
+<!-- Intro -->
+<table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale" style="background-color: #1C1C1C"
+       width="100%">
+    <tr>
+        <td>
+            <table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale"
+                   style="background-color: #FFFFFF" width="620">
+                <tr>
+                    <td height="50">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale-90"
+                               width="490">
+                            <tr>
+                                <td align="center" style="font-size: 22px; color: #1c1c1c; font-weight: bold;">
+                                    O nama</td>
+                            </tr>
+                            <tr>
+                                <td height="10" valign="bottom">
+                                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="30">
+                                        <tr>
+                                            <td height="3"
+                                                style="background-color: var(--theme-color); border-radius: 3px">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="30">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="font-size: 14px; color: #1c1c1c; line-height: 24px;">
+                                    <span th:text="${opisUstanove}"></span></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="50" valign="bottom">
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale-90"
+                               width="550">
+                            <tr>
+                                <td height="1" style="background-color: #E8E8E8"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<!-- #### 2 col #### -->
+<table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale" style="background-color: #1C1C1C"
+       width="100%">
+    <tr>
+        <td>
+            <table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale"
+                   style="background-color: #F5F5F5" width="620">
+                <tr>
+                    <td>
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale-90"
+                               width="540">
+                            <tr>
+                                <td>
+                                    <table align="right" border="0" cellpadding="0" cellspacing="0"
+                                           class="w3l-scale" style=" font-size: 14px; color: #9b9b9b;" width="165">
+                                        <tr>
+                                            <td height="60">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left"
+                                                style="font-size: 20px; line-height: 32px; color: #1c1c1c;">
+                                                Sabskrajb po sabskrajb pogača!</td>
+                                        </tr>
+                                        <tr>
+                                            <td height="10">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td align=""
+                                                style="font-size: 13.5px; color: #1c1c1c; line-height: 23px; text-align: left">
+                                                Sabskrajbom na ustanove dobijate bodove. Kada skupite određeni broj bodova ostvarujete pravo
+                                                na promo vaučer koji možete iskoristiti za razne popuste.<br>
+                                                <br>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table align="left" border="0" cellpadding="0" cellspacing="0" class="w3l-scale"
+                                           style="font-size: 14px; color: #9b9b9b;" width="346">
+                                        <tr>
+                                            <td height="40">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="w3l-scale-center"><a href="#"><img
+                                                    src='cid:slika3' class="img-responsive"></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="40">&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<!-- #### 2 col #### -->
+<table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale" style="background-color: #1C1C1C"
+       width="100%">
+    <tr>
+        <td>
+            <table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale"
+                   style="background-color: #FFFFFF" width="620">
+                <tr>
+                    <td height="40">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale-90"
+                               width="560">
+                            <tr>
+                                <td height="40">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="font-size: 22px; color: #1c1c1c; font-weight: bold;">
+                                    Hvala na poverenju!</td>
+                            </tr>
+                            <tr>
+                                <td height="10"></td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="font-size: 14px; color: #1c1c1c; line-height: 24px;">
+                                    PODRŠKA U OBRAZOVANJU</td>
+                            </tr>
+                            <tr>
+                                <td height="10">&nbsp;</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="40">&nbsp;</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<!-- #### footer #### -->
+<table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale" style="background-color: #1C1C1C"
+       width="100%">
+    <tr>
+        <td>
+            <table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale"
+                   style="background-color: #FFFFFF" width="620">
+                <tr>
+                    <td align="center">
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" class="w3l-scale"
+                               width="560">
+                            <tr>
+                                <td align="center" style="font-size: 12px; color: #1c1c1c; line-height: 24px;">
+                                    <a href="#" style="color: #1c1c1c;">Oglasi</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#"
+                                                                                              style="color: #1c1c1c;">O nama</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#"
+                                                                                              style="color: #1c1c1c;">Kontakt</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#"
+                                                                                              style=" font-size: 12px; color: #1c1c1c; line-height: 24px;">Početna</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="10">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="5" style="font-size: 1px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="font-size: 12px; color: #9b9a9c; line-height: 18px;">
+                                    Copyright © 2020. All rights reserved. Završni rad: <a
+                                        style="color: #1d44b8; font-weight: bold;"
+                                        href="https://www.linkedin.com/in/vladimir-bos/">Vladimir Bošković</a></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="50">&nbsp;</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td height="75">&nbsp;</td>
+    </tr>
+</table>
+</body>
+
+</html>

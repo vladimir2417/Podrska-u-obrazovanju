@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>Podrška u obrazovanju</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
+
+  <link rel="stylesheet" href="../static/css/cssNovi/bootstrap.css" th:href="@{/css/cssNovi/bootstrap.css}">
+  <link rel="stylesheet" href="../static/css/cssNovi/animate.css" th:href="@{/css/cssNovi/animate.css}">
+  <link rel="stylesheet" href="../static/css/cssNovi/owl.carousel.min.css"
+        th:href="@{/css/cssNovi/owl.carousel.min.css}">
+
+  <link rel="stylesheet" href="../static/fonts/ionicons/css/ionicons.min.css"
+        th:href="@{/fonts/ionicons/css/ionicons.min.css}">
+  <link rel="stylesheet" href="../static/fonts/fontawesome/css/font-awesome.min.css"
+        th:href="@{/fonts/fontawesome/css/font-awesome.min.css}">
+  <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css"
+        th:href="@{/fonts/flaticon/font/flaticon.css}">
+  <link rel="stylesheet" href="../static/css/cssNovi/magnific-popup.css" th:href="@{/css/cssNovi/magnific-popup.css}">
+
+  <!-- Theme Style -->
+  <link rel="stylesheet" href="../static/css/cssNovi/style.css" th:href="@{/css/cssNovi/style.css}">
+</head>
+<body>
+
+<!-- header -->
+<header role="banner">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand absolute" th:href="@{/pocetna}">Podrška u obrazovanju</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05"
+              aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse navbar-light" id="navbarsExample05">
+
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link active" th:href="@{/pocetna}">Početna</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/oglasi/svi}">Oglasi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/o-nama}">O nama</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav absolute-right">
+          <div sec:authorize="!isAuthenticated()">
+            <li>
+              <a th:href="@{/login}">Uloguj se</a> / <a th:href="@{/registracija}">Registruj se</a>
+            </li>
+          </div>
+
+          <div sec:authorize="isAuthenticated()">
+            <li>
+              <a th:href="@{/logout}">Odjavi se</a>
+            </li>
+          </div >
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<!-- END header -->
+
+<section class="site-hero overlay" data-stellar-background-ratio="0.5"
+         style="background-image: url(../static/imagesNovi/velika_slika1.jpg);"
+         th:style="'background-image: url(/imagesNovi/velika_slika1.jpg);'">
+  <div class="container">
+    <div class="row align-items-center justify-content-center site-hero-inner">
+      <div class="col-md-10">
+
+        <div class="mb-5 element-animate">
+          <div class="block-17">
+            <h2 class="heading text-center mb-8" th:text="${poruka}"></h2>
+            <h5 class="heading text-center mb-4">Unesite željene parametre i pronađite najbolje ustanove za Vas</h5>
+            <form th:action="@{/oglasi}" class="d-block d-lg-flex mb-4">
+              <div class="fields d-block d-lg-flex">
+
+                <div class="select-wrap one-third">
+                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                  <select name="" th:name="oblast" id="oblast" class="form-control" required>
+                    <option value="0">Izaberite oblast</option>
+                    <option value="IT">IT</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="LjudskiResursi">Ljudski resursi</option>
+                    <option value="Jezici">Jezici</option>
+                    <option value="Ekonomija">Ekonomija</option>
+                    <option value="Opšte">Opšte</option>
+                  </select>
+                </div>
+
+                <div class="select-wrap one-third">
+                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                  <select name="" th:name="grad" id="grad" class="form-control" required>
+                    <option value="0">Izaberite grad</option>
+                    <option value="Beograd">Beograd</option>
+                    <option value="NoviSad">Novi Sad</option>
+                    <option value="Niš">Niš</option>
+                    <option value="Kragujevac">Kragujevac</option>
+                  </select>
+                </div>
+
+                <div class="select-wrap one-third">
+                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                  <select name="" th:name="nivo" id="nivo" class="form-control" required>
+                    <option value="0">Izaberite nivo</option>
+                    <option value="Fakultet">Fakultet</option>
+                    <option value="VišaŠkola">Viša škola</option>
+                    <option value="Kurs">Kurs</option>
+                  </select>
+                </div>
+
+              </div>
+              <input type="submit" class="search-submit btn btn-primary" value="Pretraga">
+            </form>
+            <p class="text-center mb-5">Preko 100 fakulteta, škola i kurseva</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END section -->
+
+<section class="site-section element-animate">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 order-md-2">
+        <div class="block-16">
+          <figure>
+            <img src="../static/imagesNovi/img2.jpg" th:src="@{/imagesNovi/img2.jpg}" alt="Image placeholder"
+                 class="img-fluid">
+          </figure>
+        </div>
+      </div>
+      <div class="col-md-6 order-md-1">
+
+        <div class="block-15">
+          <div class="heading">
+            <h2>Dobrodošli na sajt Podrška u obrazovanju</h2>
+          </div>
+          <div class="text mb-5">
+            <p>Naša organizacija teži ka tome da omogući korisnicima pristup pravim informacijama o edukativnom sistemu
+              u zemlji.
+              Informacije su pružene od samih edukativnih ustanova koje besplatno postavljaju oglase na našu
+              platformu.</p>
+          </div>
+          <p><a href="#" class="btn btn-primary reverse py-2 px-4">Saznaj više</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END section -->
+
+<!--svi korisnici-->
+<section class="site-section element-animate" sec:authorize="!isAuthenticated()">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 order-md-1">
+        <div class="block-16">
+          <figure>
+            <img src="../static/imagesNovi/img3.jpg" th:src="@{/imagesNovi/img3.jpg}" alt="Image placeholder"
+                 class="img-fluid">
+          </figure>
+        </div>
+      </div>
+      <div class="col-md-6 order-md-2">
+
+        <div class="block-15">
+          <div class="heading">
+            <h2>Registrujte se na sajt!</h2>
+          </div>
+          <div class="text mb-5">
+            <p>Prilikom registracije na naš sajt ostvarujete pravo na bodove. Kada skupite određeni broj bodova ostvarujete pravo na promo vaučer
+            koji možete iskoristiti za razne popuste.</p>
+          </div>
+          <p><a href="#" class="btn btn-primary reverse py-2 px-4">Saznaj više</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--/svi korisnici-->
+
+<section class="site-section pt-3 element-animate">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-3">
+        <div class="media block-6 d-block">
+          <div class="icon mb-3"><span class="flaticon-book"></span></div>
+          <div class="media-body">
+            <h3 class="heading">Nelson Mandela</h3>
+            <p>Obrazovanje je najmoćnije oružje koje možete upotrebiti da promenite svet.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="media block-6 d-block">
+          <div class="icon mb-3"><span class="flaticon-student"></span></div>
+          <div class="media-body">
+            <h3 class="heading">Rabindranat Tagore</h3>
+            <p>Nemojte ograničavati decu samo na ono što ste vi naučili, jer deca su rođena u drugom vremenu.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="media block-6 d-block">
+          <div class="icon mb-3"><span class="flaticon-diploma"></span></div>
+          <div class="media-body">
+            <h3 class="heading">Klaus Mozer</h3>
+            <p>Obrazovanje je skupo, ali je neznanje još skuplje.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="media block-6 d-block">
+          <div class="icon mb-3"><span class="flaticon-professor"></span></div>
+          <div class="media-body">
+            <h3 class="heading">Šri Činmoj</h3>
+            <p>Juče sam bio pametan, zato sam želeo da menjam svet. Danas sam mudar, zato menjam sebe.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END section -->
+
+<div class="site-section bg-light">
+  <div class="container">
+    <div class="row justify-content-center mb-5 element-animate">
+      <div class="col-md-7 text-center section-heading">
+        <h2 class="text-primary heading">Novi oglasi</h2>
+        <p>Na našem sajtu možete naći preko 100 fakulteta, škola i kurseva</p>
+        <p><a href="#" class="btn btn-primary py-2 px-4"><span class="ion-ios-book mr-2"></span>Pretražite oglase</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid block-11 element-animate">
+    <div class="nonloop-block-11 owl-carousel">
+
+      <div class="item" th:each="oglas : ${oglasi}">
+        <div class="block-19">
+          <figure>
+            <a href="#" th:href="${'/oglas/' + oglas.oglasID}"><img th:src="@{${oglas.slika}}" alt="Image"
+                                                                    class="img-fluid"></a>
+          </figure>
+          <div class="text">
+            <h2 class="heading"><a href="#" th:text="${oglas.naziv}"></a></h2>
+            <p class="mb-4" th:text="${oglas.opis}"></p>
+            <div class="meta d-flex align-items-center">
+              <div class="number">
+                <span>Kliknite na oglas za više detalja.</span>
+              </div>
+              <div class="price text-right"><span th:text="${oglas.cena}"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<!-- END section -->
+
+
+<div class="container site-section element-animate">
+  <div class="row justify-content-center mb-5">
+    <div class="col-md-7 text-center section-heading">
+      <h2 class="text-primary heading">Popularne ustanove</h2>
+      <p>Zakažite obilazak ustanove preko našeg sajta.</p>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col-md-6 col-lg-4">
+      <a th:href="${'/oglasi/' + its.getUstanoveID()}">
+      <div class="block-2">
+        <div class="flipper">
+          <div class="front" style="background-image: url(../static/imagesNovi/ust1.png);"
+               th:style="'background-image: url(/imagesNovi/ust1.png);'">
+            <div class="box">
+              <h2 th:text="${its.naziv}"></h2>
+              <p th:text="${its.grad}"></p>
+            </div>
+          </div>
+          <div class="back">
+            <!-- back content -->
+            <blockquote>
+              <p th:text="${its.opis}"></p>
+            </blockquote>
+            <div class="author d-flex">
+              <div class="image mr-3 align-self-center">
+                <img th:src="@{${its.getSlika()}}" alt="">
+              </div>
+              <div class="name align-self-center">
+                <span th:text="${its.naziv}"></span>
+                <span class="position" th:text="${its.grad}"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </a><!-- .flip-container -->
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <a th:href="${'/oglasi/' + singy.getUstanoveID()}">
+      <div class="block-2">
+        <div class="flipper">
+          <div class="front" style="background-image: url(../static/imagesNovi/ust2.gif);"
+               th:style="'background-image: url(/imagesNovi/ust2.gif);'">
+            <div class="box">
+              <h2 th:text="${singy.naziv}"></h2>
+              <p th:text="${singy.grad}"></p>
+            </div>
+          </div>
+          <div class="back">
+            <!-- back content -->
+            <blockquote>
+              <p th:text="${singy.opis}"></p>
+            </blockquote>
+            <div class="author d-flex">
+              <div class="image mr-3 align-self-center">
+                <img th:src="@{${singy.getSlika()}}" alt="">
+              </div>
+              <div class="name align-self-center">
+                <span th:text="${singy.naziv}"></span>
+                <span class="position" th:text="${singy.grad}"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </a><!-- .flip-container -->
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <a th:href="${'/oglasi/' + etf.getUstanoveID()}">
+      <div class="block-2">
+        <div class="flipper">
+          <div class="front" style="background-image: url(../static/imagesNovi/ust3.png);"
+               th:style="'background-image: url(/imagesNovi/ust3.png);'">
+            <div class="box">
+              <h2 th:text="${etf.naziv}"></h2>
+              <p th:text="${etf.grad}"></p>
+            </div>
+          </div>
+          <div class="back">
+            <!-- back content -->
+            <blockquote>
+              <p th:text="${etf.opis}"></p>
+            </blockquote>
+            <div class="author d-flex">
+              <div class="image mr-3 align-self-center">
+                <img th:src="@{${etf.getSlika()}}" alt="">
+              </div>
+              <div class="name align-self-center">
+                <span th:text="${etf.naziv}"></span>
+                <span class="position" th:text="${etf.grad}"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </a>
+        <!-- .flip-container -->
+    </div>
+
+  </div>
+</div>
+<!-- END .block-2 -->
+
+
+<div class="py-5 block-22">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 mb-4 mb-md-0 pr-md-5">
+        <h2 class="heading">Jedan klik do prave ustanove za Vas.</h2>
+        <p>Preko 100 fakulteta, škola i kurseva.</p>
+      </div>
+      <div class="col-md-6">
+        <form action="#">
+          <div class="form-group">
+            <input type="submit" class="btn btn-primary submit" value="Pretražite oglase">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+        <h3>Podrška u obrazovanju</h3>
+        <p>Preko 100 fakulteta, škola i kurseva.</p>
+      </div>
+      <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+        <h3 class="heading">Brzi linkovi</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="list-unstyled">
+              <li><a th:href="@{/pocetna}">Početna</a></li>
+              <li><a th:href="@{/oglasi/svi}">Oglasi</a></li>
+              <li><a th:href="@{/o-nama}">O nama</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+        <h3 class="heading">Kontakt informacije</h3>
+        <div class="block-23">
+          <ul>
+            <li><span class="icon ion-android-pin"></span><span
+                    class="text">Mihaila Todorovića 18, Beograd, Srbija</span></li>
+            <li><a href="#"><span class="icon ion-ios-telephone"></span><span class="text">+381 65 82 52 633</span></a>
+            </li>
+            <li><a href="#"><span class="icon ion-android-mail"></span><span class="text">vlada@podrska.com</span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row pt-5">
+      <div class="col-md-12 text-center copyright">
+
+        <p class="float-md-left">
+          Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+          All rights reserved | Završni rad <a target="_blank" href="https://www.linkedin.com/in/vladimir-bos/"
+                                               class="text-primary">Vladimir Bošković</a></p>
+        <p class="float-md-right">
+          <a href="#" class="fa fa-facebook p-2"></a>
+          <a href="#" class="fa fa-twitter p-2"></a>
+          <a href="#" class="fa fa-linkedin p-2"></a>
+          <a href="#" class="fa fa-instagram p-2"></a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- END footer -->
+
+<!-- loader -->
+<div id="loader" class="show fullscreen">
+  <svg class="circular" width="48px" height="48px">
+    <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+    <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/>
+  </svg>
+</div>
+
+<script src="../static/js/jsNovi/jquery-3.2.1.min.js" th:src="@{/js/jsNovi/jquery-3.2.1.min.js}"></script>
+<script src="../static/js/jsNovi/jquery-migrate-3.0.0.js" th:src="@{/js/jsNovi/jquery-migrate-3.0.0.js}"></script>
+<script src="../static/js/jsNovi/popper.min.js" th:src="@{/js/jsNovi/popper.min.js}"></script>
+<script src="../static/js/jsNovi/bootstrap.min.js" th:src="@{/js/jsNovi/bootstrap.min.js}"></script>
+<script src="../static/js/jsNovi/owl.carousel.min.js" th:src="@{/js/jsNovi/owl.carousel.min.js}"></script>
+<script src="../static/js/jsNovi/jquery.waypoints.min.js" th:src="@{/js/jsNovi/jquery.waypoints.min.js}"></script>
+<script src="../static/js/jsNovi/jquery.stellar.min.js" th:src="@{/js/jsNovi/jquery.stellar.min.js}"></script>
+<script src="../static/js/jsNovi/jquery.animateNumber.min.js"
+        th:src="@{/js/jsNovi/jquery.animateNumber.min.js}"></script>
+
+<script src="../static/js/jsNovi/jquery.magnific-popup.min.js"
+        th:src="@{/js/jsNovi/jquery.magnific-popup.min.js}"></script>
+
+<script src="../static/js/jsNovi/main.js" th:src="@{/js/jsNovi/main.js}"></script>
+</body>
+</html>

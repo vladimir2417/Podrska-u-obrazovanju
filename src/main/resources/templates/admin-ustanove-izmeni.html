@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Material-Icons.css}" href="../static/css/Material-Icons.css" />
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" href="../static/css/font-awesome.min.css">
+    <link th:href="@{/css/material-dashboard.css}" href="../static/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+    <link th:href="@{/css/black-dashboard.css}" href="../static/css/black-dashboard.css" rel="stylesheet" />
+    <style>
+        div.absolute{
+            position: absolute;
+            top: 80px;
+            right: 0;
+            width: 900px;
+            max-width: 900px;
+            height: auto;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body class="dark-edition">
+<div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="black">
+
+        <div class="sidebar-wrapper ps-container ps-theme-default" data-ps-id="3a8db1f4-24d8-4dbf-85c9-4f5215c1b29a">
+            <ul class="nav">
+
+                <li class="nav-item ">
+                    <a class="nav-link" th:href="@{/admin/ustanove/dodaj}">
+                        <i class="material-icons">add</i>
+                        <p>Dodaj ustanove</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" th:href="@{/admin/ustanove/lista}">
+                        <i class="material-icons">edit_user</i>
+                        <p>Izmeni ustanove</p>
+                    </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" th:href="@{/admin/oglasi/lista}">
+                        <i class="material-icons">edit_user</i>
+                        <p>Izmeni oglase</p>
+                    </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" th:href="@{/admin/korisnici/lista}">
+                        <i class="material-icons">person</i>
+                        <p>Brisni korisnika</p>
+                    </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" th:href="@{/logout}" >
+                        <i class="material-icons">logout</i>
+                        <p>Izloguj se</p>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="absolute">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="col-md-8 mx-auto">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title">Izmeni ustanovu</h4>
+                        </div>
+                        <form th:object="${ustanovaDto}" th:action="@{/admin/ustanove/sacuvaj-izmene}" method="post">
+                            <div class="card-body">
+
+                                <input type="hidden" th:field="*{ustanoveID}"/>
+                                <input type="hidden" th:field="*{password}"/>
+                                <input type="hidden" th:field="*{username}"/>
+                                <input type="hidden" th:field="*{email}"/>
+                                <div class="col-md-12 ">
+                                    <div class="form-group">
+                                        <label>Naziv</label>
+                                        <input type="text" id="naziv" name="naziv"  class="form-control"th:field="*{naziv}">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 ">
+                                    <div class="form-group">
+                                        <label>Adresa</label>
+                                        <input type="text" id="adresa" name="adresa"  class="form-control"th:field="*{adresa}">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 ">
+                                    <div class="form-group">
+                                        <label>Grad</label>
+                                        <input type="text" id="grad" name="grad"  class="form-control"th:field="*{grad}">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 ">
+                                    <div class="form-group">
+                                        <label>Br telefona</label>
+                                        <input type="text" id="brTelefona" name="brTelefona"  class="form-control"th:field="*{brTelefona}">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 ">
+                                    <div class="form-group">
+                                        <label>Opis</label>
+                                        <input type="text" id="opis" name="opis"  class="form-control"th:field="*{opis}">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" id="btn_save" name="btn_save" class="btn btn-fill btn-primary">Izmeni</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+

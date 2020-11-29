@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <title>Podrška u obrazovanju</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/css/cssNovi/bootstrap.css" th:href="@{/css/cssNovi/bootstrap.css}">
+    <link rel="stylesheet" href="../static/css/cssNovi/animate.css" th:href="@{/css/cssNovi/animate.css}">
+    <link rel="stylesheet" href="../static/css/cssNovi/owl.carousel.min.css" th:href="@{/css/cssNovi/owl.carousel.min.css}">
+
+    <link rel="stylesheet" href="../static/fonts/ionicons/css/ionicons.min.css" th:href="@{/fonts/ionicons/css/ionicons.min.css}">
+    <link rel="stylesheet" href="../static/fonts/fontawesome/css/font-awesome.min.css" th:href="@{/fonts/fontawesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css" th:href="@{/fonts/flaticon/font/flaticon.css}">
+
+    <link th:href="@{/cute-alert-master/styleConfirm.css}" href="../static/cute-alert-master/styleConfirm.css" rel='stylesheet'  />
+    <!-- Theme Style -->
+    <link rel="stylesheet" href="../static/css/cssNovi/style.css" th:href="@{/css/cssNovi/style.css}">
+  </head>
+  <body>
+
+  <!-- header -->
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand absolute" th:href="@{/pocetna}">Podrška u obrazovanju</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05"
+                aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse navbar-light" id="navbarsExample05">
+
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link active" th:href="@{/pocetna}">Početna</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/oglasi/svi}">Oglasi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/o-nama}">O nama</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav absolute-right">
+            <div sec:authorize="!isAuthenticated()">
+              <li>
+                <a th:href="@{/login}">Uloguj se</a> / <a th:href="@{/registracija}">Registruj se</a>
+              </li>
+            </div>
+
+            <div sec:authorize="isAuthenticated()">
+              <li>
+                <a th:href="@{/logout}">Odjavi se</a>
+              </li>
+            </div >
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- END header -->
+
+  <!-- section -->
+  <section class="site-hero site-sm-hero overlay" data-stellar-background-ratio="0.5" style="background-image: url(../static/imagesNovi/velika_slika4.jpg);" th:style="'background-image: url(/imagesNovi/velika_slika4.jpg);'">
+      <div class="container">
+        <div class="row align-items-center justify-content-center site-hero-sm-inner">
+          <div class="col-md-7 text-center">
+  
+            <div class="mb-5 element-animate">
+              <h1 class="mb-2" th:text="${oglas.naziv}"></h1>
+              <p class="bcrumb"><a th:href="@{/pocetna}">Početna</a> <span class="sep ion-android-arrow-dropright px-2"></span> <a th:href="@{/oglasi}">Oglasi</a> <span class="sep ion-android-arrow-dropright px-2"></span>  <span class="current" th:text="${oglas.naziv}"></span></p>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+  </section>
+    <!-- END section -->
+
+    <div class="site-section bg-light element-animate">
+      <div class="container">
+        <div class="row">
+
+          <!-- oglas -->
+          <div class="col-md-6 col-lg-8 order-md-2 mb-5">
+            <div class="row">
+              <div class="col-md-12">
+                <img src="../static/imagesNovi/img_2.jpg" th:src="@{${oglas.getSlika()}}" alt="" class="img-fluid">
+              </div>  
+            </div>
+            
+            <section class="episodes">
+              <div class="container">
+                <div class="row mb-5">
+                  <div class="col-md-12 pt-5">
+                    <h2>Opis</h2>
+                    <p th:text="${oglas.opis}"></p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </div>
+          <!-- kraj oglas -->
+
+          <!-- ustanova -->
+          <div class="col-md-6 col-lg-4 order-md-1">
+            <div class="block-29 mb-5">
+              <h2 class="heading">Detalji ustanove</h2>
+              <ul>
+                <li><span class="text-1">Naziv:</span> <span class="text-2" th:text="${ustanova.naziv}"></span></li>
+                <li><span class="text-1">Adresa:</span> <span class="text-2" th:text="${ustanova.adresa}"></span></li>
+                <li><span class="text-1">Grad:</span> <span class="text-2" th:text="${ustanova.grad}"></span></li>
+                <li><span class="text-1">Email:</span> <span class="text-2" th:text="${ustanova.email}"></span></li>
+                <li><span class="text-1">Br. telefona:</span> <span class="text-2" th:text="${ustanova.brTelefona}"></span></li>
+              </ul>
+            </div>
+
+            <div class="block-28 text-center mb-5">
+              <figure>
+                <img src="../static/imagesNovi/person_3.jpg" th:src="@{${ustanova.getSlika()}}" alt="" class="img-fluid">
+              </figure>
+              <h2 class="heading">O ustanovi</h2>
+              <h3 class="subheading"></h3>
+              <p>
+                <a href="#" class="fa fa-twitter p-2"></a>
+                <a href="#" class="fa fa-facebook p-2"></a>
+                <a href="#" class="fa fa-linkedin p-2"></a>
+              </p>
+              <p th:text="${ustanova.opis}"></p>
+              
+            </div>
+
+            <div class="block-26">
+              <h3 class="heading">Pretplata</h3>
+              <ul>
+                <li>Zapratite ustanovu kako biste ostali u toku sa najnovijim oglasima i ostvarite bodove koje možete iskoristiti za popust na školarinu.</li>
+
+                <div sec:authorize="!isAuthenticated()">
+                  <li><a style="color: white" onClick='cuteAlert({type: "error",
+                                             title: "Upozorenje",
+                                             message: "Morate biti prijavljeni da biste se pretplatili na ustanovu",
+                                             buttonText: "Okej"})'>Pretplati se</a></li>
+                </div>
+
+                <div sec:authorize="isAuthenticated()" th:if="${daLiJePrijavljen == true}">
+                  <li><a style="color: white" onClick='cuteAlert({type: "info",
+                                             title: "Već ste pretplaćeni",
+                                             message: "Već ste pretplaćeni na ustanovu",
+                                             buttonText: "Okej"})'>Pretplaćeni ste</a></li>
+                </div>
+
+                <div sec:authorize="isAuthenticated()" th:if="${daLiJePrijavljen == true}">
+                  <li><a style="color: white" th:href="${'/mejling-lista-obrisi/'+ustanova.ustanoveID+'/'+oglas.oglasID}">Odjavi se</a></li>
+                </div>
+
+                <div sec:authorize="isAuthenticated()" th:if="${daLiJePrijavljen == false}">
+                  <li><a style="color: white" th:href="${'/mejling-lista-sacuvaj/'+ustanova.ustanoveID+'/'+oglas.oglasID}">Pretplati se</a></li>
+                </div>
+
+                <div sec:authorize="isAuthenticated()" th:if="${daLiJeZakazao == true}">
+                  <li><a style="color: white" onClick='cuteAlert({type: "info",
+                                             title: "Već ste zakazali",
+                                             message: "Već ste zakazali obilazak ustanove, sačekajte email potvrde.",
+                                             buttonText: "Okej"})'>Zakažite obilazak</a></li>
+                </div>
+
+                <div sec:authorize="isAuthenticated()" th:if="${daLiJeZakazao == false}">
+                  <li><a style="color: white" th:href="${'/zakazivanje-obilaska/'+ustanova.ustanoveID}">Zakažite obilazak</a></li>
+                </div>
+              </ul>
+            </div>
+          </div>
+          <!-- kraj ustanova -->
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="site-section bg-light">
+      <div class="container">
+        <div class="row justify-content-center mb-5 element-animate">
+          <div class="col-md-7 text-left section-heading">
+            <h2 class="text-primary heading">Još oglasa ustanove:</h2>
+            <p>Zapratite ustanovu i budite u toku sa najnovijim oglasima.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid block-11 element-animate">
+        <div class="nonloop-block-11 owl-carousel">
+          <div class="item" th:each="oglas : ${oglasiUstanove}">
+            <div class="block-19">
+              <figure>
+                <a href="#" th:href="${'/oglas/' + oglas.oglasID}"><img th:src="@{${oglas.getSlika()}}" alt="Image" class="img-fluid"></a>
+              </figure>
+              <div class="text">
+                <h2 class="heading"><a href="#" th:text="${oglas.naziv}"></a></h2>
+                <p class="mb-4" th:text="${oglas.opis}"></p>
+                <div class="meta d-flex align-items-center">
+                  <div class="number">
+                    <span>Kliknite na oglas za više detalja.</span>
+                  </div>
+                  <div class="price text-right"><span th:text="${oglas.cena}"></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="py-5 block-22">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 mb-4 mb-md-0 pr-md-5">
+          <h2 class="heading">Jedan klik do prave ustanove za Vas.</h2>
+          <p>Preko 100 fakulteta, škola i kurseva.</p>
+        </div>
+        <div class="col-md-6">
+          <form action="#">
+            <div class="form-group">
+              <input type="submit" class="btn btn-primary submit" value="Pretražite oglase">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+          <h3>Podrška u obrazovanju</h3>
+          <p>Preko 100 fakulteta, škola i kurseva.</p>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+          <h3 class="heading">Brzi linkovi</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="list-unstyled">
+                <li><a th:href="@{/pocetna}">Početna</a></li>
+                <li><a th:href="@{/oglasi/svi}">Oglasi</a></li>
+                <li><a th:href="@{/o-nama}">O nama</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+          <h3 class="heading">Kontakt informacije</h3>
+          <div class="block-23">
+            <ul>
+              <li><span class="icon ion-android-pin"></span><span
+                      class="text">Mihaila Todorovića 18, Beograd, Srbija</span></li>
+              <li><a href="#"><span class="icon ion-ios-telephone"></span><span class="text">+381 65 82 52 633</span></a>
+              </li>
+              <li><a href="#"><span class="icon ion-android-mail"></span><span class="text">vlada@podrska.com</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row pt-5">
+        <div class="col-md-12 text-center copyright">
+
+          <p class="float-md-left">
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+            All rights reserved | Završni rad <a target="_blank" href="https://www.linkedin.com/in/vladimir-bos/"
+                                                 class="text-primary">Vladimir Bošković</a></p>
+          <p class="float-md-right">
+            <a href="#" class="fa fa-facebook p-2"></a>
+            <a href="#" class="fa fa-twitter p-2"></a>
+            <a href="#" class="fa fa-linkedin p-2"></a>
+            <a href="#" class="fa fa-instagram p-2"></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- END footer -->
+    
+    <!-- loader -->
+    <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/></svg></div>
+
+    <script src="../static/js/jsNovi/jquery-3.2.1.min.js" th:src="@{/js/jsNovi/jquery-3.2.1.min.js}"></script>
+    <script src="../static/js/jsNovi/jquery-migrate-3.0.0.js" th:src="@{/js/jsNovi/jquery-migrate-3.0.0.js}"></script>
+    <script src="../static/js/jsNovi/popper.min.js" th:src="@{/js/jsNovi/popper.min.js}"></script>
+    <script src="../static/js/jsNovi/bootstrap.min.js" th:src="@{/js/jsNovi/bootstrap.min.js}"></script>
+    <script src="../static/js/jsNovi/owl.carousel.min.js" th:src="@{/js/jsNovi/owl.carousel.min.js}"></script>
+    <script src="../static/js/jsNovi/jquery.waypoints.min.js" th:src="@{/js/jsNovi/jquery.waypoints.min.js}"></script>
+    <script src="../static/js/jsNovi/jquery.stellar.min.js" th:src="@{/js/jsNovi/jquery.stellar.min.js}"></script>
+    <script src="../static/js/jsNovi/jquery.animateNumber.min.js" th:src="@{/js/jsNovi/jquery.animateNumber.min.js}"></script>
+
+    <script src="../static/js/jsNovi/main.js" th:src="@{/js/jsNovi/main.js}"></script>
+
+    <script src="../static/cute-alert-master/cute-alert.js" th:src="@{/cute-alert-master/cute-alert.js}"></script>
+  </body>
+</html>

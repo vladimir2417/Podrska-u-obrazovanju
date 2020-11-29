@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <title>Free Education Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/css/cssNovi/bootstrap.css" th:href="@{/css/cssNovi/bootstrap.css}">
+    <link rel="stylesheet" href="../static/css/cssNovi/animate.css" th:href="@{/css/cssNovi/animate.css}">
+    <link rel="stylesheet" href="../static/css/cssNovi/owl.carousel.min.css" th:href="@{/css/cssNovi/owl.carousel.min.css}">
+
+    <link rel="stylesheet" href="../static/fonts/ionicons/css/ionicons.min.css" th:href="@{/fonts/ionicons/css/ionicons.min.css}">
+    <link rel="stylesheet" href="../static/fonts/fontawesome/css/font-awesome.min.css" th:href="@{/fonts/fontawesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css" th:href="@{/fonts/flaticon/font/flaticon.css}">
+
+    <!-- Theme Style -->
+    <link rel="stylesheet" href="../static/css/cssNovi/style.css" th:href="@{/css/cssNovi/style.css}">
+  </head>
+  <body>
+
+  <!-- header -->
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand absolute" th:href="@{/pocetna}">Podrška u obrazovanju</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05"
+                aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse navbar-light" id="navbarsExample05">
+
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link active" th:href="@{/pocetna}">Početna</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/oglasi/svi}">Oglasi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/o-nama}">O nama</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav absolute-right">
+            <div sec:authorize="!isAuthenticated()">
+              <li>
+                <a th:href="@{/login}">Uloguj se</a>
+              </li>
+            </div>
+
+            <div sec:authorize="isAuthenticated()">
+              <li>
+                <a th:href="@{/logout}">Odjavi se</a>
+              </li>
+            </div >
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- END header -->
+
+  <section class="site-hero site-sm-hero overlay" data-stellar-background-ratio="0.5" style="background-image: url(../static/imagesNovi/velika_slika2.jpg);" th:style="'background-image: url(/imagesNovi/velika_slika2.jpg);'">
+    <div class="container">
+      <div class="row align-items-center justify-content-center site-hero-sm-inner">
+        <div class="col-md-7 text-center">
+          <div class="mb-5 element-animate">
+              <h1 class="mb-2" style="color: white">Treba Vam pomoć?</h1>
+              <h3 class="mb-2" style="color: white">Tu smo da pomognemo! Samo unesite željene parametre i mi radimo teži deo posla!</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END section -->
+    
+    <section class="site-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-7">
+            <div class="form-wrap">
+              <h2 class="mb-5">Za početak, potrebno je da se registrujete.</h2>
+              <h2 class="mb-5" th:text="${poruka}" style="color: darkred"></h2>
+              <form th:object="${korisnikDto}" th:action="@{/korisnik-sacuvaj}" method="post">
+                  
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="ime">Ime</label>
+                      <input type="text" id="ime" th:field="*{ime}" class="form-control py-2" required>
+                      <label style="color: darkred" th:if="${#fields.hasErrors('ime')}" th:errors="*{ime}"></label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="prezime">Prezime</label>
+                      <input type="text" id="prezime" th:field="*{prezime}" class="form-control py-2" required>
+                      <label style="color: darkred" th:if="${#fields.hasErrors('prezime')}" th:errors="*{prezime}"></label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="email">Email</label>
+                      <input type="email" id="email" th:field="*{email}" class="form-control py-2" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" oninvalid="this.setCustomValidity('Email nije u dobrom formatu.')" onkeyup="setCustomValidity('')" required>
+                      <label style="color: darkred" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="username">Korisničko ime</label>
+                      <input type="text" id="username" th:field="*{username}" class="form-control py-2" required>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="password">Šifra</label>
+                      <input type="password" id="password" th:field="*{password}" class="form-control py-2 " pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}" oninvalid="this.setCustomValidity('Šifra nije u dobrom formatu.')" onkeyup="setCustomValidity('')" required>
+                      <label>Šifra mora imati: najmanje 8 karaktera, veliko slovo, malo slovo i broj</label>
+                      <label style="color: darkred" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></label>
+                    </div>
+                  </div>
+                  <div class="row mb-5">
+                    <div class="col-md-12 form-group">
+                      <label for="confirm_password">Unesite šifru opet</label>
+                      <input type="password" name="confirm_password" id="confirm_password" class="form-control py-2" required>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <input type="submit" value="Registruj se" class="btn btn-primary px-5 py-2"><br><br>
+                      <p>Imate nalog? <a th:href="@{'/login'}" class="btn-link">Ulogujte se</a></p>
+                    </div>
+                  </div>
+                </form>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+          <h3>Podrška u obrazovanju</h3>
+          <p>Preko 100 fakulteta, škola i kurseva.</p>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+          <h3 class="heading">Brzi linkovi</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="list-unstyled">
+                <li><a th:href="@{/pocetna}">Početna</a></li>
+                <li><a th:href="@{/oglasi/svi}">Oglasi</a></li>
+                <li><a th:href="@{/o-nama}">O nama</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+          <h3 class="heading">Kontakt informacije</h3>
+          <div class="block-23">
+            <ul>
+              <li><span class="icon ion-android-pin"></span><span
+                      class="text">Mihaila Todorovića 18, Beograd, Srbija</span></li>
+              <li><a href="#"><span class="icon ion-ios-telephone"></span><span class="text">+381 65 82 52 633</span></a>
+              </li>
+              <li><a href="#"><span class="icon ion-android-mail"></span><span class="text">vlada@podrska.com</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row pt-5">
+        <div class="col-md-12 text-center copyright">
+
+          <p class="float-md-left">
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+            All rights reserved | Završni rad <a target="_blank" href="https://www.linkedin.com/in/vladimir-bos/"
+                                                 class="text-primary">Vladimir Bošković</a></p>
+          <p class="float-md-right">
+            <a href="#" class="fa fa-facebook p-2"></a>
+            <a href="#" class="fa fa-twitter p-2"></a>
+            <a href="#" class="fa fa-linkedin p-2"></a>
+            <a href="#" class="fa fa-instagram p-2"></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- END footer -->
+    
+    <!-- loader -->
+    <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/></svg></div>
+
+    <script src="../static/js/jsNovi/jquery-3.2.1.min.js" th:src="@{js/jsNovi/jquery-3.2.1.min.js}"></script>
+    <script src="../static/js/jsNovi/jquery-migrate-3.0.0.js" th:src="@{js/jsNovi/jquery-migrate-3.0.0.js}"></script>
+    <script src="../static/js/jsNovi/popper.min.js" th:src="@{js/jsNovi/popper.min.js}"></script>
+    <script src="../static/js/jsNovi/bootstrap.min.js" th:src="@{js/jsNovi/bootstrap.min.js}"></script>
+    <script src="../static/js/jsNovi/owl.carousel.min.js" th:src="@{js/jsNovi/owl.carousel.min.js}"></script>
+    <script src="../static/js/jsNovi/jquery.waypoints.min.js" th:src="@{js/jsNovi/jquery.waypoints.min.js}"></script>
+    <script src="../static/js/jsNovi/jquery.stellar.min.js" th:src="@{js/jsNovi/jquery.stellar.min.js}"></script>
+    <script src="../static/js/jsNovi/jquery.animateNumber.min.js" th:src="@{js/jsNovi/jquery.animateNumber.min.js}"></script>
+
+    <script src="../static/js/jsNovi/main.js" th:src="@{js/jsNovi/main.js}"></script>
+
+    <script th:src="@{/js/passwordMatch.js}"></script>
+    <script th:src="@{/js/regex.js}"></script>
+  </body>
+</html>
